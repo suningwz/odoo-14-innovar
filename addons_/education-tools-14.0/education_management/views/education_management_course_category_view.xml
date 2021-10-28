@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="education_management_course_category_view_tree" model="ir.ui.view">
+        <field name="name">em.category.tree</field>
+        <field name="model">em.category</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree string="Category">
+                <field name="name_category"/>
+                <field name="description_category"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="education_management_course_category_view_form" model="ir.ui.view">
+        <field name="name">em.category.form</field>
+        <field name="model">em.category</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Category">
+                <header>
+                    <button name="sync_categories_courses_moodle" string="Sync Moodle Categories Courses" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name_category"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description_category"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="education_management_course_category_view_search" model="ir.ui.view">
+        <field name="name">em.category.search</field>
+        <field name="model">em.category</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Education Management - Category">
+                <field name="name_category"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_course_category_action">
+        <field name="name">Education Management - Category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.category</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="education_management_course_category_view_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_course_category_action_form">
+        <field name="act_window_id" ref="education_management_course_category_action"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="education_management_course_category_view_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_course_category_action_tree">
+        <field name="act_window_id" ref="education_management_course_category_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="education_management_course_category_view_tree"/>
+    </record>
+
+    <menuitem name="Category" id="education_management_course_category_menu"
+              parent="education_management_batch_menu" action="education_management_course_category_action"/>
+
+</odoo>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="education_management_view_form" model="ir.ui.view">
+        <field name="name">em.student.form</field>
+        <field name="model">em.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="create_partner" string="Create Partner for Tutor"
+                            type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <separator string="Student Data"/>
+                    <group>
+                        <group>
+                            <field name="name_student" />
+                            <field name="date_of_birth_student" />
+                            <field name="years_old_student" />
+                            <field name="identification_type_student" />
+                            <field name="identification_number_student" />
+                            <field name="responsibility_type_student" />
+                            <field name="street_student" />
+                        </group>
+                        <group>
+                            <field name="phone_student" />
+                            <field name="email_student" />
+                            <field name="name_city" />
+                            <field name="zipcode" />
+                            <field name="country_id" />
+                            <field name="state_id" />
+                        </group>
+                    </group>
+                    <separator string="Educational Data"/>
+                    <group>
+                        <field string="Educational Establishment" name="educational_establishment" />
+                        <field string="Educational Schedule" name="educational_establishment_schedule" />
+                    </group>
+                    <separator string="Tutor Data"/>
+                    <group>
+                        <field name="contains_tutor"/>
+                        <field name="parent_id" attrs="{'invisible': [('contains_tutor', '!=', True)]}"/>
+                    </group>
+                    <separator string="Internal Academic Data"/>
+                    <notebook>
+                        <page string="Course History">
+                            <field name="course_detail_ids">
+                                <tree>
+                                    <field name="course_id"/>
+                                    <field name="batch_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="education_management_view_tree" model="ir.ui.view">
+        <field name="name">em.student.tree</field>
+        <field name="model">em.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name_student" />
+                <field name="email_student" />
+                <field name="phone_student" />
+            </tree>
+        </field>
+    </record>
+
+    <record id='education_management_action' model='ir.actions.act_window'>
+        <field name="name">Education Management</field>
+        <field name="res_model">em.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="education_management_view_search" model="ir.ui.view">
+        <field name="name">em.student.search</field>
+        <field name="model">em.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name_student" />
+            </search>
+        </field>
+    </record>
+
+    <menuitem name="Education Management" id="education_management_base_menu" />
+    <menuitem name="Students" id="education_management_student_menu"
+              parent="education_management_base_menu" action="education_management_action"/>
+
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="education_management_tutor_view_form" model="ir.ui.view">
+        <field name="name">em.tutor.form</field>
+        <field name="model">em.tutor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator string="Tutor Data"/>
+                    <group>
+                        <group>
+                            <field name="name_tutor" />
+                            <field name="email_tutor" />
+                            <field name="street_tutor" />
+                            <field name="phone_tutor" />
+                        </group>
+                        <group>
+                            <field name="identification_type_tutor" />
+                            <field name="identification_number_tutor" />
+                            <field name="responsibility_type_tutor" />
+                        </group>
+                    </group>
+                    <separator string="Student Tutor"/>
+                    <group>
+                        <field name="student_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="education_management_tutor_view_tree" model="ir.ui.view">
+        <field name="name">em.tutor.tree</field>
+        <field name="model">em.tutor</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name_tutor" />
+                <field name="email_tutor" />
+                <field name="phone_tutor" />
+                <field name="responsibility_type_tutor" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="education_management_tutor_view_search" model="ir.ui.view">
+        <field name="name">em.tutor.search</field>
+        <field name="model">em.tutor</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Education Management - Tutor">
+                <field name="name_tutor"/>
+                <field name="identification_number_tutor"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_tutor_action">
+        <field name="name">Education Management - Tutor</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.tutor</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="education_management_tutor_view_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem name="Tutor" id="education_management_tutor_menu"
+              parent="education_management_base_menu" action="education_management_tutor_action"/>
+
+</odoo>

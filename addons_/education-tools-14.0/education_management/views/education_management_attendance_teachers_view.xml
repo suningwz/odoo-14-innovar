@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="education_management_attendances_teachers_view_tree" model="ir.ui.view">
+        <field name="name">em.attendances.teachers.tree</field>
+        <field name="model">em.attendances.teachers</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree string="Attendances Teachers">
+                <field name="date_attendance"/>
+                <field name="teachers_id"/>
+                <field name="batch_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="education_management_attendances_teachers_view_form" model="ir.ui.view">
+        <field name="name">em.attendances.teachers.form</field>
+        <field name="model">em.attendances.teachers</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Attendances Teachers">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_attendance"/>
+                            <field name="batch_id"/>
+                        </group>
+                        <group>
+                            <field name="teachers_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_attendances_teachers_action">
+        <field name="name">Education Management - Attendances Teachers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.attendances.teachers</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_attendances_teachers_action_form">
+        <field name="act_window_id" ref="education_management_attendances_teachers_action"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="education_management_attendances_teachers_view_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_attendances_teachers_action_tree">
+        <field name="act_window_id" ref="education_management_attendances_teachers_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="education_management_attendances_teachers_view_tree"/>
+    </record>
+
+    <menuitem name="Attendances Teachers" id="education_management_submenu_attendances_teachers_menu"
+              parent="education_management_teachers_menu"
+              action="education_management_attendances_teachers_action"/>
+</odoo>

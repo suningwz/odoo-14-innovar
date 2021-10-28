@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.setting.view.form.em</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Education Management" string="Education Management" data-key="education_management">
+                    <h2>Education Management</h2>
+                    <div class="row mt16 o_settings_container">
+                        <label for="url" string="Moodle URL"/>
+                        <field name="url" />
+                    </div>
+                    <div class="row mt16 o_settings_container">
+                        <label for="token" string="Token"/>
+                        <field name="token" password="True"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_education_management_settings" model="ir.actions.act_window">
+        <field name="name">Education Management Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'education_management'}</field>
+    </record>
+
+    <menuitem id="menu_education_management_configuration"
+              name="Configuration"
+              parent="education_management_base_menu"
+              sequence="100"/>
+
+    <menuitem id="menu_education_management_settings"
+              name="Settings"
+              parent="menu_education_management_configuration"
+              sequence="10"
+              action="action_education_management_settings"/>
+</odoo>

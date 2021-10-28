@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="education_management_admission_view_tree" model="ir.ui.view">
+        <field name="name">em.admission.tree</field>
+        <field name="model">em.admission</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree string="Admissions">
+                <field name="name_admission"/>
+                <field name="start_date_admission"/>
+                <field name="end_date_admission"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="education_management_admission_view_form" model="ir.ui.view">
+        <field name="name">em.admission.form</field>
+        <field name="model">em.admission</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Admission">
+                <sheet>
+                    <separator string="Admission Data"/>
+                    <group>
+                        <group>
+                            <field name="name_admission" />
+                            <field name="start_date_admission" />
+                            <field name="end_date_admission" />
+                        </group>
+                        <group>
+                            <field name="batch_id"/>
+                        </group>
+                    </group>
+                    <separator string="Enrollments"/>
+                    <group>
+                        <field name="admission_register_id" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_admission_action">
+        <field name="name">Education Management - Admission</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.admission</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_admission_action_form">
+        <field name="act_window_id" ref="education_management_admission_action"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="education_management_admission_view_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_admission_action_tree">
+        <field name="act_window_id" ref="education_management_admission_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="education_management_admission_view_tree"/>
+    </record>
+
+    <menuitem name="Admission" id="education_management_admission_menu"
+              parent="education_management_base_menu" action="education_management_admission_action"/>
+    <menuitem name="Batch Admission" id="education_management_batch_admission_menu"
+              parent="education_management_admission_menu" action="education_management_admission_action"/>
+
+</odoo>

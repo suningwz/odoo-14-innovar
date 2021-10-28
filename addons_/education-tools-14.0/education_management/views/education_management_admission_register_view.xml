@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="education_management_admission_register_view_tree" model="ir.ui.view">
+        <field name="name">em.admission.register.tree</field>
+        <field name="model">em.admission.register</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree string="Admissions">
+                <field name="name_student"/>
+                <field name="email_student"/>
+                <field name="identification_type_student" />
+                <field name="identification_number_student" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="education_management_admission_register_view_form" model="ir.ui.view">
+        <field name="name">em.admission.register.form</field>
+        <field name="model">em.admission.register</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Admission">
+                <header>
+                    <button name="enroll_student" string="Enroll" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <separator string="Registration Data" />
+                    <group>
+                        <group>
+                            <field name="is_student" />
+                            <field name="student_id" options="{'no_create_edit': True}"
+                                           attrs="{'required':[('is_student','=',True)],'invisible': [('is_student','=', False)]}"/>
+                            <field name="name_student" />
+                            <field name="date_of_birth_student" />
+                            <field name="years_old_student" />
+                            <field name="street_student" />
+                            <field name="email_student" />
+                            <field name="phone_student" />
+                        </group>
+                        <group>
+                            <field name="enrollment_date" />
+                            <field name="admission_id" />
+                            <field name="identification_type_student" />
+                            <field name="identification_number_student" />
+                            <field name="responsibility_type_student" />
+                            <field name="name_city" />
+                            <field name="zipcode" />
+                            <field name="country_id" />
+                            <field name="state_id" />
+                        </group>
+                    </group>
+                    <separator string="Educational Data"/>
+                    <group>
+                        <field string="Educational Establishment" name="educational_establishment" />
+                        <field string="Educational Schedule" name="educational_establishment_schedule" />
+                    </group>
+                    <separator string="Tutor Data"/>
+                    <group>
+                        <field name="contains_tutor"/>
+                        <field name="parent_id" attrs="{'invisible': [('contains_tutor', '!=', True)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_admission_register_action">
+        <field name="name">Education Management - Registration Data</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.admission.register</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'group_by':'admission_id'}</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_admission_register_action_form">
+        <field name="act_window_id" ref="education_management_admission_register_action"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="education_management_admission_register_view_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_admission_register_action_tree">
+        <field name="act_window_id" ref="education_management_admission_register_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="education_management_admission_register_view_tree"/>
+    </record>
+
+    <menuitem name="Registration Data" id="education_management_admission_register_menu"
+              parent="education_management_admission_menu" action="education_management_admission_register_action"/>
+
+</odoo>
