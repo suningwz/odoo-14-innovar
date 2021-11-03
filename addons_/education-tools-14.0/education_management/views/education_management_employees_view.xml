@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="education_management_employees_view_form" model="ir.ui.view">
+        <field name="name">em.employees.form</field>
+        <field name="model">em.employees</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator string="Employees Data"/>
+                    <group>
+                        <group>
+                            <field name="name_employee"/>
+                            <field name="surname_employee"/>
+                            <field name="phone_employee"/>
+                        </group>
+                        <group>
+                            <field name="work_position"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="education_management_employees_view_tree" model="ir.ui.view">
+        <field name="name">em.employees.tree</field>
+        <field name="model">em.employees</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name_employee"/>
+                <field name="work_position"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="education_management_employees_view_search" model="ir.ui.view">
+        <field name="name">em.employees.search</field>
+        <field name="model">em.employees</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Education Management - Employees">
+                <field name="name_employee"/>
+                <field name="work_position"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_employees_action">
+        <field name="name">Education Management - Employees</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.employees</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="education_management_employees_view_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem name="Employees" id="education_management_employees_menu"
+              parent="education_management_base_menu" action="education_management_employees_action"/>
+</odoo>
