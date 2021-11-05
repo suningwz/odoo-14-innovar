@@ -14,6 +14,8 @@ class Course(models.Model):
         string="Type Of Course", default='classroom', required=True)
     description_course = fields.Text(string="Description")
     category_id = fields.Many2one('em.category', "Category")
+    price_course = fields.Float(string="Price")
+    product_template_id = fields.Many2one('product.template', "Product")
     active = fields.Boolean(default=True)
 
     def get_moodle_parameters(self):
@@ -276,3 +278,16 @@ class Course(models.Model):
 
     def sync_courses_moodle(self):
         pass
+
+    def create_product_template(self):
+        for record in self:
+            product_id = self.env['product.template'].create({
+                'name': self.name_course,
+                'sale_ok': True,
+                'purchase_ok': False,
+                'type': 'consu',
+                'categ_id': 1,
+                'default_code': self.short_name_course,
+                'list_price': self.price_course
+            }).id
+            record.product_template_id = product_id

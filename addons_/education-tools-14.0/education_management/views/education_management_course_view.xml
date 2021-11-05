@@ -21,6 +21,7 @@
             <form string="Course">
                 <header>
                     <button name="create_courses_moodle" string="Create Moodle Courses" type="object" class="oe_highlight"/>
+                    <button name="create_product_template" string="Create Product" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <group>
@@ -32,6 +33,7 @@
                         <group>
                             <field name="category_id"/>
                             <field name="type_of_course"/>
+                            <field name="price_course"/>
                         </group>
                     </group>
                     <group>
