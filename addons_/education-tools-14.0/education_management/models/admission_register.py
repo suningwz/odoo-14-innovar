@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+
 
 class AdmissionRegister(models.Model):
     _name = 'em.admission.register'
@@ -32,6 +32,7 @@ class AdmissionRegister(models.Model):
             self.zipcode = student.zipcode
             self.state_id = student.state_id.id
             self.country_id = student.country_id.id
+            self.contains_tutor = student.contains_tutor
             self.parent_id = student.parent_id.id
         else:
             self.name_student = ''
@@ -49,6 +50,7 @@ class AdmissionRegister(models.Model):
             self.zipcode = ''
             self.state_id = ''
             self.country_id = ''
+            self.contains_tutor = False
             self.parent_id = ''
 
     def get_student_vals(self):
@@ -69,6 +71,7 @@ class AdmissionRegister(models.Model):
                 'zipcode': student.zipcode,
                 'state_id': student.state_id.id,
                 'country_id': student.country_id.id,
+                'contains_tutor': student.contains_tutor,
                 'parent_id': student.parent_id.id
             }
 
@@ -90,11 +93,64 @@ class AdmissionRegister(models.Model):
 
     def enroll_student(self):
         for record in self:
-            if not record.is_student:
+            if (not record.is_student and not record.contains_tutor):
+                vals_student = record.get_student_vals()
+                student_id = self.env['em.student'].create(vals_student).id
+                record.student_id = student_id
+                self.env['em.student.course'].create({
+                    'student_id': record.student_id.id,
+                    'course_id': record.admission_id.batch_id.course_id.id,
+                    'batch_id': record.admission_id.batch_id.id
+                })
+                partner_id = self.env['res.partner'].create({
+                    'name': vals_student.get('name_student'),
+                    'street': vals_student.get('street_student'),
+                    'phone': vals_student.get('phone_student'),
+                    'email': vals_student.get('email_student'),
+                    'l10n_latam_identification_type_id': int(vals_student.get('identification_type_student')),
+                    'vat': vals_student.get('identification_number_student'),
+                    'l10n_ar_afip_responsibility_type_id': int(vals_student.get('responsibility_type_student'))
+                }).id
+                record.partner_id = partner_id
+                print(
+                    "Student Was Successfully Created And Enrolled [StudentId] " + str(
+                        student_id) + " [PartnerId] " + str(partner_id))
+            elif (record.is_student and not record.contains_tutor):
+                vals_student = record.get_student_vals()
+                student_id = self.env['em.student'].search([
+                    ('identification_number_student', '=', vals_student.get('identification_number_student')),
+                    ('email_student', '=', vals_student.get('email_student')),
+                    ('name_student', '=', vals_student.get('name_student'))
+                ], limit=1).id
+                self.env['em.student.course'].create({
+                    'student_id': record.student_id.id,
+                    'course_id': record.admission_id.batch_id.course_id.id,
+                    'batch_id': record.admission_id.batch_id.id
+                })
+                partner_id = self.env['res.partner'].search([
+                    ('vat', '=', vals_student.get('identification_number_student')),
+                    ('email', '=', vals_student.get('email_student')),
+                    ('name', '=', vals_student.get('name_student'))
+                ], limit=1).id
+                print(
+                    "Existing Student Was Successfully Enrolled [StudentId] " + str(student_id) + " [PartnerId] " + str(
+                        partner_id))
+            elif (not record.is_student and record.contains_tutor):
                 vals_student = record.get_student_vals()
                 vals_parent = record.get_parent_vals()
                 student_id = self.env['em.student'].create(vals_student).id
                 record.student_id = student_id
+                self.env['em.student.course'].create({
+                    'student_id': record.student_id.id,
+                    'course_id': record.admission_id.batch_id.course_id.id,
+                    'batch_id': record.admission_id.batch_id.id
+                })
+                parent_id = self.env['em.tutor'].search([
+                    ('identification_number_tutor', '=', vals_parent.get('identification_number_tutor')),
+                    ('email_tutor', '=', vals_parent.get('email_tutor')),
+                    ('name_tutor', '=', vals_parent.get('name_tutor'))
+                ], limit=1).id
+                record.parent_id = parent_id
                 partner_id = self.env['res.partner'].create({
                     'name': vals_parent.get('name_tutor'),
                     'street': vals_parent.get('street_tutor'),
@@ -105,24 +161,6 @@ class AdmissionRegister(models.Model):
                     'l10n_ar_afip_responsibility_type_id': int(vals_parent.get('responsibility_type_tutor'))
                 }).id
                 record.partner_id = partner_id
-                self.env['em.student.course'].create({
-                    'student_id': record.student_id.id,
-                    'course_id': record.admission_id.batch_id.course_id.id,
-                    'batch_id': record.admission_id.batch_id.id
-                })
-            else:
-                vals_parent = record.get_parent_vals()
-                partner_id = self.env['res.partner'].search([
-                    ('vat', '=', vals_parent.get('identification_number_tutor')),
-                    ('email', '=', vals_parent.get('email_tutor')),
-                    ('name', '=', vals_parent.get('name_tutor'))
-                ], limit=1).id
-                if partner_id:
-                    record.partner_id = partner_id
-                    self.env['em.student.course'].create({
-                        'student_id': record.student_id.id,
-                        'course_id': record.admission_id.batch_id.course_id.id,
-                        'batch_id': record.admission_id.batch_id.id
-                    })
-                else:
-                    raise ValidationError("The res.partner Of em.parent Don't Exist")
+                print(
+                    "Existing Student Was Successfully Enrolled [StudentId] " + str(student_id) + " [TutorId] " + str(
+                        parent_id) + " [PartnerIdOfTutor] " + str(partner_id))

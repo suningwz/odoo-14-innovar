@@ -91,7 +91,11 @@
     </record>
 
     <menuitem name="Education Management" id="education_management_base_menu" />
+
     <menuitem name="Students" id="education_management_student_menu"
-              parent="education_management_base_menu" action="education_management_action"/>
+              parent="education_management_base_menu"/>
+
+    <menuitem name="List Students" id="education_management_student_submenu"
+              parent="education_management_student_menu" action="education_management_action"/>
 
 </odoo>
