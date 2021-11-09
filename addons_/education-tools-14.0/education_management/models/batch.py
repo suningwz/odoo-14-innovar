@@ -15,8 +15,7 @@ class Batch(models.Model):
     create_admission = fields.Boolean(default=True)
     admission_id = fields.Many2one('em.admission', 'Admission')
     skills_teachers_id = fields.One2many('em.skills.teachers', 'batch_id',
-                                        'Teachers Detail',
-                                        track_visibility='onchange', readonly=True)
+                                        'Teachers Detail', readonly=True)
 
     def get_admission_vals(self):
         vals = {

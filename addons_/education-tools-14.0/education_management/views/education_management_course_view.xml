@@ -28,12 +28,13 @@
                         <group>
                             <field name="name_course"/>
                             <field name="short_name_course"/>
+                            <field name="category_id"/>
                             <field name="active"/>
                         </group>
                         <group>
-                            <field name="category_id"/>
                             <field name="type_of_course"/>
-                            <field name="price_course"/>
+                            <field name="enrollement_price"/>
+                            <field name="price_per_month"/>
                         </group>
                     </group>
                     <group>
