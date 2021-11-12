@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="employee_system" model="em.employees">
+            <field name="name_employee">Odoo</field>
+            <field name="surname_employee">System</field>
+            <field name="phone_employee">S/D</field>
+            <field name="work_position">SysAdmin</field>
+        </record>
+    </data>
+</odoo>

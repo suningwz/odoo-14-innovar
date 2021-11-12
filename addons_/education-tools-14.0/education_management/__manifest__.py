@@ -11,6 +11,7 @@
         'security/ir.model.access.csv',
         'data/attendance_sheet_sequence.xml',
         'data/payments_students_sequence.xml',
+        'data/employee_data.xml',
         'views/education_management_view.xml',
         'views/education_management_tutor_view.xml',
         'views/education_management_employees_view.xml',

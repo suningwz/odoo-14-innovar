@@ -37,3 +37,10 @@ class Batch(models.Model):
                     'batch_id': batch_id
                 }).id
                 data.admission_id = admission_id
+                self.env['em.attendances.students'].create({
+                    'name_record': "Attendance Record " + data.name_batch,
+                    #FIXME
+                    'code': lambda self: self.env['ir.sequence'].next_by_code('em.attendances.students'),
+                    'employee_id': 1,
+                    'batch_id': batch_id
+                })
