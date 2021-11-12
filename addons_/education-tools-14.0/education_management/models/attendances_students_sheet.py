@@ -6,7 +6,8 @@ class AttendacesStudentsSheet(models.Model):
     _description = "Attendance Sheet"
     _order = "attendance_date desc"
 
-    name_sheet = fields.Char(string="Name Sheet", readonly=True)
+    name_sheet = fields.Char(string="Name Sheet", readonly=True, required=True, copy=False, default=lambda self:
+    self.env['ir.sequence'].next_by_code('em.attendances.students.sheet'))
     attendance_register_id = fields.Many2one('em.attendances.students', 'Attendace Register', required=True)
     attendance_date = fields.Date(
         'Date', required=True, default=fields.Date.today(),

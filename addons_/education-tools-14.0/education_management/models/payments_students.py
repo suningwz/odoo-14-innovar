@@ -11,7 +11,7 @@ class PaymentsStudents(models.Model):
     date_of_issue = fields.Date(string="Date Of Issue", default=fields.Date.today(), required=True)
     due_date = fields.Date(string="Due Date", required=True)
     ref_name = fields.Char(string="Reference")
-    total_amount = fields.Float(string="Total Amount", required=True)
+    total_amount = fields.Float(string="Total Amount", compute='compute_total_amount', required=True)
     observations = fields.Text(string="Observations")
     payment_type = fields.Selection([
         ('cash', 'Cash'),
@@ -32,6 +32,10 @@ class PaymentsStudents(models.Model):
     partner_id = fields.Many2one('res.partner', "Customer", required=True)
     pay_lines_id = fields.One2many('em.payment.students.line', 'receipt_id', "Details")
 
+    @api.depends('pay_lines_id.product_template_id')
+    def compute_total_amount(self):
+        for line in self:
+            line.total_amount = sum(line.pay_lines_id.product_template_id.mapped('list_price'))
 
 class PaymentsStudentsLine(models.Model):
     _name = 'em.payment.students.line'
