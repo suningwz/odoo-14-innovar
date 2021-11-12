@@ -22,6 +22,7 @@
             <form string="Admission">
                 <header>
                     <button name="enroll_student" string="Enroll" type="object" class="oe_highlight"/>
+                    <button name="action_open_payment" string="Register Payment" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <separator string="Registration Data" />

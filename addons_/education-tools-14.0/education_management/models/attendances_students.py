@@ -7,7 +7,8 @@ class AttendancesStudentes (models.Model):
     _order = "id DESC"
 
     name_record = fields.Char(string="Name", required=True, tracking=True)
-    code = fields.Char(string="Code", required=True, tracking=True)
+    code = fields.Char(string="Code", readonly=True, required=True, copy=False, default=lambda self:
+    self.env['ir.sequence'].next_by_code('em.attendances.students'))
     employee_id = fields.Many2one('em.employees', 'Attendant', required=True)
     batch_id = fields.Many2one('em.batch', 'Batch', required=True, tracking=True)
     active = fields.Boolean(default=True)

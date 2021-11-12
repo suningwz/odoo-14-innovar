@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="education_management_payments_students_view_form" model="ir.ui.view">
+        <field name="name">em.payments.students.form</field>
+        <field name="model">em.payments.students</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator string="Payment Register"/>
+                    <group>
+                        <group>
+                            <field name="payment_sequence"/>
+                            <field name="partner_id"/>
+                            <field name="date_of_issue"/>
+                            <field name="due_date"/>
+                        </group>
+                        <group>
+                            <field name="ref_name"/>
+                            <field name="payment_type"/>
+                            <field name="total_amount"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="observations"/>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Details">
+                                <field name="pay_lines_id">
+                                    <tree>
+                                        <field name="quantity"/>
+                                        <field name="discount"/>
+                                        <field name="product_template_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="education_management_payments_students_view_tree" model="ir.ui.view">
+        <field name="name">em.payments.students.tree</field>
+        <field name="model">em.payments.students</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree string="Payment Register">
+                <field name="payment_sequence"/>
+                <field name="partner_id"/>
+                <field name="date_of_issue"/>
+                <field name="due_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_payments_students_action">
+        <field name="name">Education Management - Payment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.payments.students</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_payments_students_action_form">
+        <field name="act_window_id" ref="education_management_payments_students_action"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="education_management_payments_students_view_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_payments_students_action_tree">
+        <field name="act_window_id" ref="education_management_payments_students_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="education_management_payments_students_view_tree"/>
+    </record>
+
+</odoo>

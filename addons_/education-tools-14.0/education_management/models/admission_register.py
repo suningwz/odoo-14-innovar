@@ -164,3 +164,14 @@ class AdmissionRegister(models.Model):
                 print(
                     "Existing Student Was Successfully Enrolled [StudentId] " + str(student_id) + " [TutorId] " + str(
                         parent_id) + " [PartnerIdOfTutor] " + str(partner_id))
+
+
+    def action_open_payment(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Payments',
+            'res_model': 'em.payments.students',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'target': 'current',
+        }
