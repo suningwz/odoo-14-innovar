@@ -12,6 +12,8 @@ class PaymentsStudents(models.Model):
     due_date = fields.Date(string="Due Date", required=True)
     ref_name = fields.Char(string="Reference")
     total_amount = fields.Float(string="Total Amount", compute='compute_total_amount', required=True)
+    total_paid = fields.Float(string="Total Paid", required=True, readonly=False)
+    total_balance = fields.Float(string="Total Balance", required=True)
     observations = fields.Text(string="Observations")
     payment_type = fields.Selection([
         ('cash', 'Cash'),
@@ -19,16 +21,10 @@ class PaymentsStudents(models.Model):
         ('mp', 'MercadoPago'),
         ('exchange', 'Exchange'),
         ('card', 'Card')], string="Payment Type", default='cash', required=True)
-    payment_status = fields.Selection([
-        ('draft', 'Draft'),
-        ('in_pay', 'In Payment'),
-        ('paid', 'Paid')
-    ], string="Payment Status", default='draft', required=True)
     invoice_status = fields.Selection([
-        ('draft', 'Draft'),
         ('pending', 'Pending Billing'),
         ('invoiced', 'Invoiced')
-    ], default='draft', required=True)
+    ], default='pending', required=True)
     partner_id = fields.Many2one('res.partner', "Customer", required=True)
     pay_lines_id = fields.One2many('em.payment.students.line', 'receipt_id', "Details")
 
@@ -36,6 +32,22 @@ class PaymentsStudents(models.Model):
     def compute_total_amount(self):
         for line in self:
             line.total_amount = sum(line.pay_lines_id.product_template_id.mapped('list_price'))
+
+    @api.onchange('total_amount')
+    def onchange_total_amount(self):
+        for data in self:
+            data.total_paid = data.total_amount
+
+    @api.onchange('total_paid')
+    def onchange_total_paid(self):
+        for data in self:
+            data.total_balance = data.total_amount - data.total_paid
+
+    def payment_invoice_status_pending(self):
+        self.invoice_status = 'pending'
+
+    def payment_invoice_status_invoiced(self):
+        self.invoice_status = 'invoiced'
 
 class PaymentsStudentsLine(models.Model):
     _name = 'em.payment.students.line'

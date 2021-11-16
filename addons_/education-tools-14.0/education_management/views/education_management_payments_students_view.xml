@@ -5,19 +5,28 @@
         <field name="model">em.payments.students</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button type="object" name="payment_invoice_status_invoiced"
+                            string="Mark As Billed"
+                            class="oe_highlight"/>
+                    <field name="invoice_status" widget="statusbar"
+                           statusbar_visible="pending,invoiced"/>
+                </header>
                 <sheet>
                     <separator string="Payment Register"/>
                     <group>
                         <group>
                             <field name="payment_sequence"/>
                             <field name="partner_id"/>
+                            <field name="ref_name"/>
                             <field name="date_of_issue"/>
                             <field name="due_date"/>
                         </group>
                         <group>
-                            <field name="ref_name"/>
                             <field name="payment_type"/>
                             <field name="total_amount"/>
+                            <field name="total_paid"/>
+                            <field name="total_balance"/>
                         </group>
                     </group>
                     <group>
@@ -79,4 +88,9 @@
         <field name="view_id" ref="education_management_payments_students_view_tree"/>
     </record>
 
+    <menuitem name="Payments" id="education_management_payments_menu"
+              parent="education_management_base_menu"/>
+
+    <menuitem name="Payments Students" id="education_management_payments_students_submenu"
+              parent="education_management_payments_menu" action="education_management_payments_students_action"/>
 </odoo>

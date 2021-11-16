@@ -12,7 +12,7 @@ from . import classrooms
 from . import skills_teachers
 from . import attendances_teachers
 from . import attendances_students
-from . import attendances_students_line
 from . import attendances_students_sheet
+from . import attendances_students_line
 from . import payments_students
 from . import res_config_settings
