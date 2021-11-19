@@ -28,10 +28,12 @@ class PaymentsStudents(models.Model):
     partner_id = fields.Many2one('res.partner', "Customer", required=True)
     pay_lines_id = fields.One2many('em.payment.students.line', 'receipt_id', "Details")
 
-    @api.depends('pay_lines_id.product_template_id')
+    @api.depends('pay_lines_id.product_template_id', 'pay_lines_id.quantity', 'pay_lines_id.discount')
     def compute_total_amount(self):
         for line in self:
-            line.total_amount = sum(line.pay_lines_id.product_template_id.mapped('list_price'))
+            sum_amount = sum(line.pay_lines_id.product_template_id.mapped('list_price'))
+            line.total_amount = sum_amount * line.pay_lines_id.quantity - line.pay_lines_id.discount
+            # print("Total Amount " + str(sum_amount) + " Quantity " + str(line.pay_lines_id.quantity) + " Discount " + str(line.pay_lines_id.discount))
 
     @api.onchange('total_amount')
     def onchange_total_amount(self):
@@ -49,11 +51,13 @@ class PaymentsStudents(models.Model):
     def payment_invoice_status_invoiced(self):
         self.invoice_status = 'invoiced'
 
+
 class PaymentsStudentsLine(models.Model):
     _name = 'em.payment.students.line'
     _description = "Payments Students Line"
 
     quantity = fields.Integer(string="Quantity", default=1)
-    discount = fields.Integer(string="Discount", default=0)
+    discount = fields.Integer(string="Discount", default=0,
+                              help="The value of this field must be interpreted as an amount over the price of the product ")
     product_template_id = fields.Many2one('product.template', 'Line', required=True)
-    receipt_id = fields. Many2one('em.payments.students', "Receipt")
+    receipt_id = fields.Many2one('em.payments.students', "Receipt")
