@@ -25,8 +25,19 @@ class PaymentsStudents(models.Model):
         ('pending', 'Pending Billing'),
         ('invoiced', 'Invoiced')
     ], default='pending', required=True)
-    partner_id = fields.Many2one('res.partner', "Customer", required=True)
+    student_id = fields.Many2one('em.student', "Student", required=True)
+    partner_id = fields.Many2one('res.partner', "Customer", required=True, readonly=True)
     pay_lines_id = fields.One2many('em.payment.students.line', 'receipt_id', "Details")
+
+    @api.onchange('student_id')
+    def onchange_student_id(self):
+        for data in self:
+            partner_id = self.env['res.partner'].search([
+                ('vat', '=', data.student_id.identification_number_student),
+                ('email', '=', data.student_id.email_student),
+                ('name', '=', data.student_id.name_student)
+            ], limit=1).id
+            data.partner_id = partner_id
 
     @api.depends('pay_lines_id.product_template_id', 'pay_lines_id.quantity', 'pay_lines_id.discount')
     def compute_total_amount(self):
