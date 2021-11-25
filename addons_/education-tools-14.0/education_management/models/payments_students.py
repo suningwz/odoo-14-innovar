@@ -11,7 +11,7 @@ class PaymentsStudents(models.Model):
     date_of_issue = fields.Date(string="Date Of Issue", default=fields.Date.today(), required=True)
     due_date = fields.Date(string="Due Date", required=True)
     ref_name = fields.Char(string="Reference")
-    total_amount = fields.Float(string="Total Amount", compute='compute_total_amount', required=True)
+    total_amount = fields.Float(string="Total Amount", required=True)
     total_paid = fields.Float(string="Total Paid", required=True, readonly=False)
     total_balance = fields.Float(string="Total Balance", required=True)
     observations = fields.Text(string="Observations")
@@ -26,7 +26,7 @@ class PaymentsStudents(models.Model):
         ('invoiced', 'Invoiced')
     ], default='pending', required=True)
     student_id = fields.Many2one('em.student', "Student", required=True)
-    partner_id = fields.Many2one('res.partner', "Customer", required=True, readonly=True)
+    partner_id = fields.Many2one('res.partner', "Customer", readonly=True)
     pay_lines_id = fields.One2many('em.payment.students.line', 'receipt_id', "Details")
 
     @api.onchange('student_id')
@@ -39,12 +39,11 @@ class PaymentsStudents(models.Model):
             ], limit=1).id
             data.partner_id = partner_id
 
-    @api.depends('pay_lines_id.product_template_id', 'pay_lines_id.quantity', 'pay_lines_id.discount')
+    @api.depends('pay_lines_id')
     def compute_total_amount(self):
         for line in self:
             sum_amount = sum(line.pay_lines_id.product_template_id.mapped('list_price'))
             line.total_amount = sum_amount * line.pay_lines_id.quantity - line.pay_lines_id.discount
-            # print("Total Amount " + str(sum_amount) + " Quantity " + str(line.pay_lines_id.quantity) + " Discount " + str(line.pay_lines_id.discount))
 
     @api.onchange('total_amount')
     def onchange_total_amount(self):

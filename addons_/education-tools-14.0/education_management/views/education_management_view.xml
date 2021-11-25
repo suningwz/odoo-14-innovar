@@ -14,27 +14,27 @@
                     <separator string="Student Data"/>
                     <group>
                         <group>
-                            <field name="name_student" />
-                            <field name="date_of_birth_student" />
-                            <field name="years_old_student" />
-                            <field name="identification_type_student" />
-                            <field name="identification_number_student" />
-                            <field name="responsibility_type_student" />
-                            <field name="street_student" />
+                            <field name="name_student"/>
+                            <field name="date_of_birth_student"/>
+                            <field name="years_old_student"/>
+                            <field name="identification_type_student"/>
+                            <field name="identification_number_student"/>
+                            <field name="responsibility_type_student"/>
+                            <field name="street_student"/>
                         </group>
                         <group>
-                            <field name="phone_student" />
-                            <field name="email_student" />
-                            <field name="name_city" />
-                            <field name="zipcode" />
-                            <field name="country_id" />
-                            <field name="state_id" />
+                            <field name="phone_student"/>
+                            <field name="email_student"/>
+                            <field name="name_city"/>
+                            <field name="zipcode"/>
+                            <field name="country_id"/>
+                            <field name="state_id"/>
                         </group>
                     </group>
                     <separator string="Educational Data"/>
                     <group>
-                        <field string="Educational Establishment" name="educational_establishment" />
-                        <field string="Educational Schedule" name="educational_establishment_schedule" />
+                        <field string="Educational Establishment" name="educational_establishment"/>
+                        <field string="Educational Schedule" name="educational_establishment_schedule"/>
                     </group>
                     <separator string="Tutor Data"/>
                     <group>
@@ -48,6 +48,22 @@
                                 <tree>
                                     <field name="course_id"/>
                                     <field name="batch_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <separator string="Payment Data"/>
+                    <notebook>
+                        <page string="Payments History">
+                            <field name="receipt_detail_id">
+                                <tree>
+                                    <field name="payment_sequence"/>
+                                    <field name="ref_name"/>
+                                    <field name="date_of_issue"/>
+                                    <field name="due_date"/>
+                                    <field name="total_paid"/>
+                                    <field name="total_amount"/>
+                                    <field name="total_balance"/>
                                 </tree>
                             </field>
                         </page>
@@ -67,9 +83,9 @@
         <field name="model">em.student</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name_student" />
-                <field name="email_student" />
-                <field name="phone_student" />
+                <field name="name_student"/>
+                <field name="email_student"/>
+                <field name="phone_student"/>
             </tree>
         </field>
     </record>
@@ -85,12 +101,12 @@
         <field name="model">em.student</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name_student" />
+                <field name="name_student"/>
             </search>
         </field>
     </record>
 
-    <menuitem name="Education Management" id="education_management_base_menu" />
+    <menuitem name="Education Management" id="education_management_base_menu"/>
 
     <menuitem name="Students" id="education_management_student_menu"
               parent="education_management_base_menu"/>

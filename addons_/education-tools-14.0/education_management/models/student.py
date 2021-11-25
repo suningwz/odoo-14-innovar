@@ -58,7 +58,8 @@ class Student(models.Model):
     parent_id = fields.Many2one('em.tutor', "Tutor")
     course_detail_ids = fields.One2many('em.student.course', 'student_id',
                                         'Course Details',
-                                        track_visibility='onchange', readonly=True)
+                                        readonly=True)
+    receipt_detail_id = fields.One2many('em.payments.students', 'student_id', 'Receipt Detail', readonly=True)
 
     @api.onchange('date_of_birth_student')
     def get_years_old(self):
