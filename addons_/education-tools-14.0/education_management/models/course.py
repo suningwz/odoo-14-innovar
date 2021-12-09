@@ -10,6 +10,7 @@ class Course(models.Model):
     name_course = fields.Char(string="Name", required=True)
     short_name_course = fields.Char(string="Short Name", required=True)
     requires_enrollment_price = fields.Boolean(string="Requires Enrollment Price", default=False)
+    months_of_duration = fields.Integer(string="Months Of Duration", required=True, default=1)
     type_of_course = fields.Selection([
         ('classroom','Classroom Course'), ('distance','Distance Course')],
         string="Type Of Course", default='classroom', required=True)

@@ -33,6 +33,7 @@
                         </group>
                         <group>
                             <field name="type_of_course"/>
+                            <field name="months_of_duration"/>
                             <field name="requires_enrollment_price"/>
                             <field name="enrollment_price" attrs="{'invisible': [('requires_enrollment_price','!=',True)]}"/>
                             <field name="price_per_month"/>
