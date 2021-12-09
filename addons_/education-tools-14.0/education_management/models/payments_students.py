@@ -40,6 +40,7 @@ class PaymentsStudents(models.Model):
     ], default='pending', required=True)
     student_id = fields.Many2one('em.student', "Student", required=True)
     partner_id = fields.Many2one('res.partner', "Customer", readonly=True)
+    student_course_id = fields.Many2one('em.student.course', "Details")
     # pay_lines_id = fields.One2many('em.payment.students.line', 'receipt_id', "Details")
 
     @api.onchange('student_id')

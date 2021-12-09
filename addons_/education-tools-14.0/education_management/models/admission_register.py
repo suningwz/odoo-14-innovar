@@ -111,6 +111,23 @@ class AdmissionRegister(models.Model):
                     'vat': vals_student.get('identification_number_student'),
                     'l10n_ar_afip_responsibility_type_id': int(vals_student.get('responsibility_type_student'))
                 }).id
+                course = self.env['em.course'].search([
+                    ('id', '=', record.admission_id.batch_id.course_id.id)
+                ], limit=1)
+                for i in range(0, course.months_of_duration):
+                    self.env['em.payments.students'].create({
+                        # FIXME
+                        'payment_sequence' : lambda self: self.env['ir.sequence'].next_by_code('em.payments.students'),
+                        'date_of_issue' : fields.Date.today(),
+                        'due_date': fields.Date.today(),
+                        'ref_name' : 'quota' + str(i+1),
+                        'total_amount' : course.price_per_month,
+                        'total_paid' : 0,
+                        'total_balance' : course.price_per_month,
+                        'payment_type' : 'cash',
+                        'invoice_status' : 'pending',
+                        'student_id' : record.student_id.id
+                    })
                 record.partner_id = partner_id
                 print(
                     "Student Was Successfully Created And Enrolled [StudentId] " + str(
@@ -132,6 +149,23 @@ class AdmissionRegister(models.Model):
                     ('email', '=', vals_student.get('email_student')),
                     ('name', '=', vals_student.get('name_student'))
                 ], limit=1).id
+                course = self.env['em.course'].search([
+                    ('id', '=', record.admission_id.batch_id.course_id.id)
+                ], limit=1)
+                for i in range(0, course.months_of_duration):
+                    self.env['em.payments.students'].create({
+                        # FIXME
+                        'payment_sequence' : lambda self: self.env['ir.sequence'].next_by_code('em.payments.students'),
+                        'date_of_issue' : fields.Date.today(),
+                        'due_date': fields.Date.today(),
+                        'ref_name' : 'quota' + str(i+1),
+                        'total_amount' : course.price_per_month,
+                        'total_paid' : 0,
+                        'total_balance' : course.price_per_month,
+                        'payment_type' : 'cash',
+                        'invoice_status' : 'pending',
+                        'student_id' : record.student_id.id
+                    })
                 print(
                     "Existing Student Was Successfully Enrolled [StudentId] " + str(student_id) + " [PartnerId] " + str(
                         partner_id))
@@ -160,6 +194,23 @@ class AdmissionRegister(models.Model):
                     'vat': vals_parent.get('identification_number_tutor'),
                     'l10n_ar_afip_responsibility_type_id': int(vals_parent.get('responsibility_type_tutor'))
                 }).id
+                course = self.env['em.course'].search([
+                    ('id', '=', record.admission_id.batch_id.course_id.id)
+                ], limit=1)
+                for i in range(0, course.months_of_duration):
+                    self.env['em.payments.students'].create({
+                        # FIXME
+                        'payment_sequence' : lambda self: self.env['ir.sequence'].next_by_code('em.payments.students'),
+                        'date_of_issue' : fields.Date.today(),
+                        'due_date': fields.Date.today(),
+                        'ref_name' : 'quota' + str(i+1),
+                        'total_amount' : course.price_per_month,
+                        'total_paid' : 0,
+                        'total_balance' : course.price_per_month,
+                        'payment_type' : 'cash',
+                        'invoice_status' : 'pending',
+                        'student_id' : record.student_id.id
+                    })
                 record.partner_id = partner_id
                 print(
                     "Existing Student Was Successfully Enrolled [StudentId] " + str(student_id) + " [TutorId] " + str(
