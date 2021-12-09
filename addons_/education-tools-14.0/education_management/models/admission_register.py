@@ -97,11 +97,11 @@ class AdmissionRegister(models.Model):
                 vals_student = record.get_student_vals()
                 student_id = self.env['em.student'].create(vals_student).id
                 record.student_id = student_id
-                self.env['em.student.course'].create({
+                detail_course = self.env['em.student.course'].create({
                     'student_id': record.student_id.id,
                     'course_id': record.admission_id.batch_id.course_id.id,
                     'batch_id': record.admission_id.batch_id.id
-                })
+                }).id
                 partner_id = self.env['res.partner'].create({
                     'name': vals_student.get('name_student'),
                     'street': vals_student.get('street_student'),

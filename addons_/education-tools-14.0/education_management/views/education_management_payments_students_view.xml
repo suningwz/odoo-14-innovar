@@ -25,13 +25,14 @@
                         </group>
                         <group>
                             <field name="payment_type"/>
-                            <div class="o_row">
-                                <b>Total Amount</b>
-                                <field name="total_amount"/>
-                                <button type="object" name="compute_total_amount"
-                                        string="Compute Amount"
-                                        class="oe_highlight"/>
-                            </div>
+                            <field name="total_amount"/>
+<!--                            <div class="o_row">-->
+<!--                                <b>Total Amount</b>-->
+<!--                                <field name="total_amount"/>-->
+<!--                                <button type="object" name="compute_total_amount"-->
+<!--                                        string="Compute Amount"-->
+<!--                                        class="oe_highlight"/>-->
+<!--                            </div>-->
                             <field name="total_paid"/>
                             <field name="total_balance"/>
                         </group>
@@ -39,19 +40,19 @@
                     <group>
                         <field name="observations"/>
                     </group>
-                    <group>
-                        <notebook>
-                            <page string="Details">
-                                <field name="pay_lines_id">
-                                    <tree>
-                                        <field name="quantity"/>
-                                        <field name="discount"/>
-                                        <field name="product_template_id"/>
-                                    </tree>
-                                </field>
-                            </page>
-                        </notebook>
-                    </group>
+<!--                    <group>-->
+<!--                        <notebook>-->
+<!--                            <page string="Details">-->
+<!--                                <field name="pay_lines_id">-->
+<!--                                    <tree>-->
+<!--                                        <field name="quantity"/>-->
+<!--                                        <field name="discount"/>-->
+<!--                                        <field name="product_template_id"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+<!--                    </group>-->
                 </sheet>
             </form>
         </field>
