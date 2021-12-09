@@ -126,7 +126,8 @@ class AdmissionRegister(models.Model):
                         'total_balance' : course.price_per_month,
                         'payment_type' : 'cash',
                         'invoice_status' : 'pending',
-                        'student_id' : record.student_id.id
+                        'student_id' : record.student_id.id,
+                        'student_course_id' : detail_course
                     })
                 record.partner_id = partner_id
                 print(
@@ -139,11 +140,11 @@ class AdmissionRegister(models.Model):
                     ('email_student', '=', vals_student.get('email_student')),
                     ('name_student', '=', vals_student.get('name_student'))
                 ], limit=1).id
-                self.env['em.student.course'].create({
+                detail_course = self.env['em.student.course'].create({
                     'student_id': record.student_id.id,
                     'course_id': record.admission_id.batch_id.course_id.id,
                     'batch_id': record.admission_id.batch_id.id
-                })
+                }).id
                 partner_id = self.env['res.partner'].search([
                     ('vat', '=', vals_student.get('identification_number_student')),
                     ('email', '=', vals_student.get('email_student')),
@@ -164,7 +165,8 @@ class AdmissionRegister(models.Model):
                         'total_balance' : course.price_per_month,
                         'payment_type' : 'cash',
                         'invoice_status' : 'pending',
-                        'student_id' : record.student_id.id
+                        'student_id' : record.student_id.id,
+                        'student_course_id': detail_course
                     })
                 print(
                     "Existing Student Was Successfully Enrolled [StudentId] " + str(student_id) + " [PartnerId] " + str(
@@ -174,11 +176,11 @@ class AdmissionRegister(models.Model):
                 vals_parent = record.get_parent_vals()
                 student_id = self.env['em.student'].create(vals_student).id
                 record.student_id = student_id
-                self.env['em.student.course'].create({
+                detail_course = self.env['em.student.course'].create({
                     'student_id': record.student_id.id,
                     'course_id': record.admission_id.batch_id.course_id.id,
                     'batch_id': record.admission_id.batch_id.id
-                })
+                }).id
                 parent_id = self.env['em.tutor'].search([
                     ('identification_number_tutor', '=', vals_parent.get('identification_number_tutor')),
                     ('email_tutor', '=', vals_parent.get('email_tutor')),
@@ -209,7 +211,8 @@ class AdmissionRegister(models.Model):
                         'total_balance' : course.price_per_month,
                         'payment_type' : 'cash',
                         'invoice_status' : 'pending',
-                        'student_id' : record.student_id.id
+                        'student_id' : record.student_id.id,
+                        'student_course_id': detail_course
                     })
                 record.partner_id = partner_id
                 print(

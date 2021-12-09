@@ -57,13 +57,14 @@
                         <page string="Payments History">
                             <field name="receipt_detail_id">
                                 <tree>
-                                    <field name="payment_sequence"/>
                                     <field name="ref_name"/>
                                     <field name="date_of_issue"/>
                                     <field name="due_date"/>
-                                    <field name="total_paid"/>
                                     <field name="total_amount"/>
+                                    <field name="total_paid"/>
                                     <field name="total_balance"/>
+                                    <field name="payment_type"/>
+                                    <field name="invoice_status"/>
                                 </tree>
                             </field>
                         </page>

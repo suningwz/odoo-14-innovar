@@ -19,6 +19,7 @@
         'views/education_management_admission_view.xml',
         'views/education_management_admission_register_view.xml',
         'views/education_management_payments_students_view.xml',
+        'views/education_management_student_course_view.xml',
         # 'views/education_management_payments_students_line_view.xml',
         'views/education_management_batch_view.xml',
         'views/education_management_course_category_view.xml',

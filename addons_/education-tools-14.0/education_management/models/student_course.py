@@ -6,10 +6,10 @@ class StudentCourse(models.Model):
     _inherit = "mail.thread"
     _rec_name = 'student_id'
 
-    student_id = fields.Many2one('em.student', 'Student', ondelete="cascade")
-    course_id = fields.Many2one('em.course', 'Course', required=True)
-    batch_id = fields.Many2one('em.batch', 'Batch', required=True)
-    course_detail_ids = fields.One2many('em.payments.students', 'student_course_id',
+    student_id = fields.Many2one('em.student', 'Student', ondelete="cascade", readonly=True)
+    course_id = fields.Many2one('em.course', 'Course', required=True, readonly=True)
+    batch_id = fields.Many2one('em.batch', 'Batch', required=True, readonly=True)
+    payments_students_ids = fields.One2many('em.payments.students', 'student_course_id',
                                         'Payment Details',
                                         readonly=True)
 

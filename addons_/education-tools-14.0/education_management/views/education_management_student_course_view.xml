@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="education_management_student_course_view_tree" model="ir.ui.view">
+        <field name="name">em.student.course.tree</field>
+        <field name="model">em.student.course</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree string="Academic Data">
+                <field name="student_id"/>
+                <field name="course_id"/>
+                <field name="batch_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="education_management_student_course_view_form" model="ir.ui.view">
+        <field name="name">em.student.course.form</field>
+        <field name="model">em.student.course</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="course_id"/>
+                        </group>
+                        <group>
+                            <field name="batch_id"/>
+                        </group>
+                    </group>
+                    <separator string="Payment Data"/>
+                    <notebook>
+                        <page string="Payment History">
+                            <field name="payments_students_ids">
+                                <tree>
+                                    <field name="ref_name"/>
+                                    <field name="date_of_issue"/>
+                                    <field name="due_date"/>
+                                    <field name="total_amount"/>
+                                    <field name="total_paid"/>
+                                    <field name="total_balance"/>
+                                    <field name="payment_type"/>
+                                    <field name="invoice_status"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
