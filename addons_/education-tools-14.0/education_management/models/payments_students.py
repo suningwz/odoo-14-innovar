@@ -12,18 +12,18 @@ class PaymentsStudents(models.Model):
     due_date = fields.Date(string="Due Date", required=True)
     ref_name = fields.Selection([
         ('enrollment', 'Enrollment'),
-        ('quota1 ', 'Quota I'),
-        ('quota2 ', 'Quota II'),
-        ('quota3 ', 'Quota III'),
-        ('quota4 ', 'Quota IV'),
-        ('quota5 ', 'Quota V'),
-        ('quota6 ', 'Quota VI'),
-        ('quota7 ', 'Quota VII'),
-        ('quota8 ', 'Quota VIII'),
-        ('quota9 ', 'Quota IX'),
-        ('quota10 ', 'Quota X'),
-        ('quota11 ', 'Quota XI'),
-        ('quota11 ', 'Quota XII')], string="Reference", default='quota1', required=True)
+        ('quota1', 'Quota I'),
+        ('quota2', 'Quota II'),
+        ('quota3', 'Quota III'),
+        ('quota4', 'Quota IV'),
+        ('quota5', 'Quota V'),
+        ('quota6', 'Quota VI'),
+        ('quota7', 'Quota VII'),
+        ('quota8', 'Quota VIII'),
+        ('quota9', 'Quota IX'),
+        ('quota10', 'Quota X'),
+        ('quota11', 'Quota XI'),
+        ('quota11', 'Quota XII')], string="Reference", default='quota1', required=True)
     total_amount = fields.Float(string="Total Amount", required=True)
     total_paid = fields.Float(string="Total Paid", required=True, readonly=False)
     total_balance = fields.Float(string="Total Balance", required=True)
