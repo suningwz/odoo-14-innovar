@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="category_course_system1" model="em.category">
+            <field name="name_category">Fundación Innovar</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="category_course_system2" model="em.category">
+            <field name="name_category">Animación Digital y Desarrollo Videojuegos</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="category_course_system3" model="em.category">
+            <field name="name_category">Cursos Varios</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="category_course_system4" model="em.category">
+            <field name="name_category">Impresión 3D</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="category_course_system5" model="em.category">
+            <field name="name_category">Informática y Telecomunicaciones</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="category_course_system6" model="em.category">
+            <field name="name_category">Marketing y E-Commerce</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="category_course_system7" model="em.category">
+            <field name="name_category">Programación</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="category_course_system8" model="em.category">
+            <field name="name_category">Robótica y Domótica</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="category_course_system9" model="em.category">
+            <field name="name_category">Capacitación Docentes</field>
+            <field name="description_category">S/D</field>
+        </record>
+    </data>
+</odoo>
