@@ -9,13 +9,14 @@ class Course(models.Model):
     moodle_course_id = fields.Integer(string="Moodle ID", readonly=True)
     name_course = fields.Char(string="Name", required=True)
     short_name_course = fields.Char(string="Short Name", required=True)
+    requires_enrollment_price = fields.Boolean(string="Requires Enrollment Price", default=False)
     type_of_course = fields.Selection([
         ('classroom','Classroom Course'), ('distance','Distance Course')],
         string="Type Of Course", default='classroom', required=True)
     description_course = fields.Text(string="Description")
     category_id = fields.Many2one('em.category', "Category")
     price_per_month = fields.Float(string="Price Per Month", required=True)
-    enrollement_price = fields.Float(string="Enrollement Price", required=True)
+    enrollment_price = fields.Float(string="Enrollment Price", required=True)
     product_template_id = fields.Many2one('product.template', "Product")
     active = fields.Boolean(default=True)
 
