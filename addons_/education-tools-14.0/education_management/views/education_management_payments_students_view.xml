@@ -35,6 +35,7 @@
 <!--                            </div>-->
                             <field name="total_paid"/>
                             <field name="total_balance"/>
+                            <field name="student_course_id"/>
                         </group>
                     </group>
                     <group>
