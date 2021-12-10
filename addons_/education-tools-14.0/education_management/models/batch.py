@@ -9,6 +9,7 @@ class Batch(models.Model):
     name_batch = fields.Char(string="Name", required=True)
     start_date = fields.Date(string="Start Date", required=True, default=fields.Date.today())
     end_date = fields.Date(string="End Date", required=True)
+    observations = fields.Text(string="Observations")
     course_id = fields.Many2one('em.course', 'Course', required=True)
     classrooms_id = fields.Many2one('em.classrooms', "Classrooms", required=True)
     active = fields.Boolean(default=True)

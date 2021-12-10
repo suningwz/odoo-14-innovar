@@ -38,6 +38,7 @@
                             <field name="active"/>
                             <field name="create_admission"/>
                         </group>
+                        <field name="observations"/>
                     </group>
                     <notebook>
                         <page string="Teacher Detail">
