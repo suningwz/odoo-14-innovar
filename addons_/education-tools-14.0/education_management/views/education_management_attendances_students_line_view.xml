@@ -25,9 +25,7 @@
                 <sheet>
                     <group col="4" colspan="4">
                         <field name="attendance_id" widget="selection"/>
-                        <field name="student_id"
-                               domain="[('course_detail_ids.course_id','=',course_id),
-                               ('course_detail_ids.batch_id','=',batch_id)]"/>
+                        <field name="student_id"/>
                         <field name="present"/>
                         <field name="absent"/>
                         <field name="excused"/>
@@ -45,30 +43,11 @@
         </field>
     </record>
 
-
-<!--    <record id="education_management_attendances_students_line_view_pivot" model="ir.ui.view">-->
-<!--        <field name="name">em.attendances.students.line.pivot</field>-->
-<!--        <field name="model">oem.attendances.students.line</field>-->
-<!--        <field name="priority" eval="8"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <pivot string="Attendance Analysis">-->
-<!--                <field name="attendance_id" type="row"/>-->
-<!--                <field name="student_id"/>-->
-<!--                <field name="present"/>-->
-<!--                <field name="course_id"/>-->
-<!--                <field name="batch_id"/>-->
-<!--                <field name="attendance_date"/>-->
-<!--            </pivot>-->
-<!--        </field>-->
-<!--    </record>-->
-
-
     <record model="ir.actions.act_window" id="education_management_attendances_students_line_action">
         <field name="name">Attendance Line</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">em.attendances.students.line</field>
         <field name="binding_view_types">form</field>
-<!--        <field name="view_mode">tree,form,pivot</field>-->
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref=""/>
         <field name="domain">[]</field>
