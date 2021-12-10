@@ -116,8 +116,7 @@ class AdmissionRegister(models.Model):
                 ], limit=1)
                 for i in range(0, course.months_of_duration):
                     self.env['em.payments.students'].create({
-                        # FIXME
-                        'payment_sequence' : lambda self: self.env['ir.sequence'].next_by_code('em.payments.students'),
+                        'payment_sequence' : self.env['ir.sequence'].next_by_code('em.payments.students'),
                         'date_of_issue' : fields.Date.today(),
                         'due_date': fields.Date.today(),
                         'ref_name' : 'quota' + str(i+1),
@@ -155,8 +154,7 @@ class AdmissionRegister(models.Model):
                 ], limit=1)
                 for i in range(0, course.months_of_duration):
                     self.env['em.payments.students'].create({
-                        # FIXME
-                        'payment_sequence' : lambda self: self.env['ir.sequence'].next_by_code('em.payments.students'),
+                        'payment_sequence' : self.env['ir.sequence'].next_by_code('em.payments.students'),
                         'date_of_issue' : fields.Date.today(),
                         'due_date': fields.Date.today(),
                         'ref_name' : 'quota' + str(i+1),
@@ -201,8 +199,7 @@ class AdmissionRegister(models.Model):
                 ], limit=1)
                 for i in range(0, course.months_of_duration):
                     self.env['em.payments.students'].create({
-                        # FIXME
-                        'payment_sequence' : lambda self: self.env['ir.sequence'].next_by_code('em.payments.students'),
+                        'payment_sequence' : self.env['ir.sequence'].next_by_code('em.payments.students'),
                         'date_of_issue' : fields.Date.today(),
                         'due_date': fields.Date.today(),
                         'ref_name' : 'quota' + str(i+1),
