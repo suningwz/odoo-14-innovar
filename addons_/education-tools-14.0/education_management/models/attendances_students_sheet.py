@@ -5,6 +5,7 @@ class AttendacesStudentsSheet(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Attendance Sheet"
     _order = "attendance_date desc"
+    _rec_name = 'name_sheet'
 
     name_sheet = fields.Char(string="Name Sheet", readonly=True, required=True, copy=False, default=lambda self:
     self.env['ir.sequence'].next_by_code('em.attendances.students.sheet'))

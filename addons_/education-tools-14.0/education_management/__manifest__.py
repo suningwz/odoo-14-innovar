@@ -10,6 +10,7 @@
         'security/groups.xml',
         'security/ir.model.access.csv',
         'data/attendance_sheet_sequence.xml',
+        'data/attendance_record_sequence.xml',
         'data/payments_students_sequence.xml',
         'data/employee_data.xml',
         'data/category_course_data.xml',
