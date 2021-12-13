@@ -59,6 +59,6 @@
     </record>
 
     <menuitem name="Attendances Teachers" id="education_management_submenu_attendances_teachers_menu"
-              parent="education_management_teachers_menu"
+              parent="education_management_employees_menu"
               action="education_management_attendances_teachers_action"/>
 </odoo>

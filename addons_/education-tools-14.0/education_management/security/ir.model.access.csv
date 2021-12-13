@@ -15,8 +15,6 @@ acl_education_management_student_course,em.student.course,model_em_student_cours
 acl_education_management_admin_student_course,em.student.course,model_em_student_course,group_education_management,1,1,1,1
 acl_education_management_tutor,em.tutor,model_em_tutor,,1,0,0,0
 acl_education_management_admin_tutor,em.tutor,model_em_tutor,group_education_management,1,1,1,1
-acl_education_management_teachers,em.teachers,model_em_teachers,,1,0,0,0
-acl_education_management_admin_teachers,em.teachers,model_em_teachers,group_education_management,1,1,1,1
 acl_education_management_classrooms,em.classrooms,model_em_classrooms,,1,0,0,0
 acl_education_management_admin_classrooms,em.classrooms,model_em_classrooms,group_education_management,1,1,1,1
 acl_education_management_skills_teachers,em.skills.teachers,model_em_skills_teachers,,1,0,0,0

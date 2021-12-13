@@ -24,7 +24,6 @@
         'views/education_management_batch_view.xml',
         'views/education_management_course_category_view.xml',
         'views/education_management_course_view.xml',
-        'views/education_management_teachers_view.xml',
         'views/education_management_classrooms_view.xml',
         'views/education_management_skills_teachers_view.xml',
         'views/education_management_attendance_teachers_view.xml',
