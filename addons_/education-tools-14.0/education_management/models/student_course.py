@@ -4,7 +4,7 @@ class StudentCourse(models.Model):
     _name = "em.student.course"
     _description = "Student Course Details"
     _inherit = "mail.thread"
-    _rec_name = 'student_id'
+    _rec_name = 'batch_id'
 
     student_id = fields.Many2one('em.student', 'Student', ondelete="cascade", readonly=True)
     course_id = fields.Many2one('em.course', 'Course', required=True, readonly=True)
