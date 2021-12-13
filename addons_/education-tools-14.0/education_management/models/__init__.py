@@ -1,5 +1,6 @@
 from . import student
 from . import course
+from . import cash_register
 from . import batch
 from . import category
 from . import admission
@@ -14,4 +15,5 @@ from . import attendances_students
 from . import attendances_students_sheet
 from . import attendances_students_line
 from . import payments_students
+from . import payments_students_line
 from . import res_config_settings

@@ -40,7 +40,6 @@
                                     <field name="total_amount"/>
                                     <field name="total_paid"/>
                                     <field name="total_balance"/>
-                                    <field name="payment_type"/>
                                     <field name="invoice_status"/>
                                 </tree>
                             </field>

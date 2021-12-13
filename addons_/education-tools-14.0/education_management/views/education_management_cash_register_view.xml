@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="education_management_cash_register_view_form" model="ir.ui.view">
+        <field name="name">em.cash.register.form</field>
+        <field name="model">em.cash.register</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator string="Cash"/>
+                    <group>
+                        <group>
+                            <field name="cash_register_sequence"/>
+                            <field name="opening_date_and_time"/>
+                            <field name="closing_date_and_time"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="total_amount"/>
+                        </group>
+                        <field name="payments_lines"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="education_management_cash_register_view_tree" model="ir.ui.view">
+        <field name="name">em.cash.register.tree</field>
+        <field name="model">em.cash.register</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree string="Cash Register">
+                <field name="cash_register_sequence"/>
+                <field name="opening_date_and_time"/>
+                <field name="closing_date_and_time"/>
+                <field name="employee_id"/>
+                <field name="payments_lines"/>
+                <field name="total_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_cash_register_action">
+        <field name="name">Education Management - Cash Register</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.cash.register</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('active', '=', True)]</field>
+        <field name="context"></field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_cash_register_action_form">
+        <field name="act_window_id" ref="education_management_cash_register_action"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="education_management_cash_register_view_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_cash_register_action_tree">
+        <field name="act_window_id" ref="education_management_cash_register_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="education_management_cash_register_view_tree"/>
+    </record>
+
+    <menuitem name="Cash Register" id="education_management_cash_register_submenu"
+              parent="education_management_payments_menu" action="education_management_cash_register_action"/>
+</odoo>

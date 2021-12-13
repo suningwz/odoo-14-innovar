@@ -31,3 +31,7 @@ acl_education_management_attendances_students_line,em.attendances.students.line,
 acl_education_management_admin_attendances_students_line,em.attendances.students.line,model_em_attendances_students_line,group_education_management,1,1,1,1
 acl_education_management_payments_students,em.payments.students,model_em_payments_students,,1,0,0,0
 acl_education_management_admin_payments_students,em.payments.students,model_em_payments_students,group_education_management,1,1,1,1
+acl_education_management_payments_students_line,em.payments.students.line,model_em_payments_students_line,,1,0,0,0
+acl_education_management_admin_payments_students_line,em.payments.students.line,model_em_payments_students_line,group_education_management,1,1,1,1
+acl_education_management_cash_register,em.cash.register,model_em_cash_register,,1,0,0,0
+acl_education_management_admin_cash_register,em.cash.register,model_em_cash_register,group_education_management,1,1,1,1

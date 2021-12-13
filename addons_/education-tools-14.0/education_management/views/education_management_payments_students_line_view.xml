@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="education_management_payments_students_line_view_form" model="ir.ui.view">
+        <field name="name">em.payments.students.line.form</field>
+        <field name="model">em.payments.students.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator string="Payment Line"/>
+                    <group>
+                        <group>
+                            <field name="payment_line_sequence"/>
+                            <field name="payment_date"/>
+                            <field name="payments_students_id"/>
+                        </group>
+                        <group>
+                            <field name="payment_type"/>
+                            <field name="total_paid"/>
+                            <field name="cash_register_id"/>
+                        </group>
+                        <field name="observations"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="education_management_payments_students_line_view_tree" model="ir.ui.view">
+        <field name="name">em.payments.students.line.tree</field>
+        <field name="model">em.payments.students.line</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree string="Payment Line">
+                <field name="payment_line_sequence"/>
+                <field name="payment_date"/>
+                <field name="payments_students_id"/>
+                <field name="payment_type"/>
+                <field name="total_paid"/>
+                <field name="cash_register_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="education_management_payments_students_line_action">
+        <field name="name">Education Management - Payment Line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">em.payments.students.line</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('active', '=', True)]</field>
+        <field name="context"></field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_payments_students_line_action_form">
+        <field name="act_window_id" ref="education_management_payments_students_line_action"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="education_management_payments_students_line_view_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="education_management_open_payments_students_line_action_tree">
+        <field name="act_window_id" ref="education_management_payments_students_line_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="education_management_payments_students_line_view_tree"/>
+    </record>
+
+    <menuitem name="Payments Line" id="education_management_payments_students_line_submenu"
+              parent="education_management_payments_menu" action="education_management_payments_students_line_action"/>
+</odoo>

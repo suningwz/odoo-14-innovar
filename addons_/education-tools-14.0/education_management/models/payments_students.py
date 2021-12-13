@@ -24,16 +24,10 @@ class PaymentsStudents(models.Model):
         ('quota10', 'Quota X'),
         ('quota11', 'Quota XI'),
         ('quota12', 'Quota XII')], string="Reference", default='quota1', required=True)
-    total_amount = fields.Float(string="Total Amount", required=True)
-    total_paid = fields.Float(string="Total Paid", required=True, readonly=False)
-    total_balance = fields.Float(string="Total Balance", required=True)
+    total_amount = fields.Float(string="Total Amount", required=True, readonly=True)
+    total_paid = fields.Float(string="Total Paid", required=True, readonly=True)
+    total_balance = fields.Float(string="Total Balance", required=True, readonly=True)
     observations = fields.Text(string="Observations")
-    payment_type = fields.Selection([
-        ('cash', 'Cash'),
-        ('bank', 'Bank Transfer'),
-        ('mp', 'MercadoPago'),
-        ('exchange', 'Exchange'),
-        ('card', 'Card')], string="Payment Type", default='cash', required=True)
     invoice_status = fields.Selection([
         ('pending', 'Pending Billing'),
         ('invoiced', 'Invoiced')
@@ -41,6 +35,7 @@ class PaymentsStudents(models.Model):
     student_id = fields.Many2one('em.student', "Student", required=True)
     partner_id = fields.Many2one('res.partner', "Customer", readonly=True)
     student_course_id = fields.Many2one('em.student.course', "Details")
+    active = fields.Boolean(string="Is Active", default=True)
 
     @api.onchange('student_id')
     def onchange_student_id(self):
