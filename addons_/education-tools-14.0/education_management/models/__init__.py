@@ -7,7 +7,6 @@ from . import admission_register
 from . import student_course
 from . import tutor
 from . import employees
-from . import teachers
 from . import classrooms
 from . import skills_teachers
 from . import attendances_teachers

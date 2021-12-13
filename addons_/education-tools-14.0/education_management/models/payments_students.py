@@ -23,7 +23,7 @@ class PaymentsStudents(models.Model):
         ('quota9', 'Quota IX'),
         ('quota10', 'Quota X'),
         ('quota11', 'Quota XI'),
-        ('quota11', 'Quota XII')], string="Reference", default='quota1', required=True)
+        ('quota12', 'Quota XII')], string="Reference", default='quota1', required=True)
     total_amount = fields.Float(string="Total Amount", required=True)
     total_paid = fields.Float(string="Total Paid", required=True, readonly=False)
     total_balance = fields.Float(string="Total Balance", required=True)
